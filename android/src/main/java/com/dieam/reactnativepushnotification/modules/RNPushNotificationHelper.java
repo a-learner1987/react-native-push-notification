@@ -448,7 +448,7 @@ public class RNPushNotificationHelper {
                         continue;
                     }
 
-                    Intent actionIntent = new Intent(context, intentClass);
+                    Intent actionIntent = new Intent(context, CustomNotificationActionReceiver.class);
                     actionIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     actionIntent.setAction(packageName + "." + action);
 
@@ -457,7 +457,7 @@ public class RNPushNotificationHelper {
                     actionIntent.putExtra("notification", bundle);
                     actionIntent.setPackage(packageName);
 
-                    PendingIntent pendingActionIntent = PendingIntent.getActivity(context, notificationID, actionIntent,
+                    PendingIntent pendingActionIntent = PendingIntent.getBroadcast(context, notificationID, actionIntent,
                             PendingIntent.FLAG_UPDATE_CURRENT);
                     notification.addAction(icon, action, pendingActionIntent);
                 }
